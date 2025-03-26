@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .sidebar {
+    width: 240px;
+    background-color: #fff;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+  }
+  
+  .query-container {
+    background-color: #1e1e1e;
+    padding: 12px;
+    color: white;
+  }
+  
+  .results-container {
+    margin-top: 16px;
+    background-color: #fff;
+  }
+  
+  .sql-editor {
+    background-color: #1e1e1e;
+    color: white;
+    font-family: monospace;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .query-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  button {
+    text-transform: none;
+  }
+  
+  /* Default to light mode */
+html {
+    color-scheme: light;
+  }
+  
+  /* Switch to dark mode when the 'dark' class is present */
+  html.dark {
+    color-scheme: dark;
+  }
+  
+  /* Optional: Ensure the body inherits the background color */
+  body {
+    background-color: var(--mui-palette-background-default);
+    color: var(--mui-palette-text-primary);
+  }
