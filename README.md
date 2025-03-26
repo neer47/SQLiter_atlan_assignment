@@ -5,7 +5,7 @@
 - **CodeMirror 6** for a powerful SQL query editor  
 - **sql-formatter** for automatic SQL query formatting  
 
-👉 **[View Demo on the Deployed Site 🚀](https://your-deployed-site-url.com)**  
+👉 **[View Demo on the Deployed Site 🚀](https://sq-liter-atlan-assignment.vercel.app/)**  
 _Replace the above link with your actual deployed site URL._  
 
 ---
