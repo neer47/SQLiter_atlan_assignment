@@ -1,53 +1,5 @@
 const mockData = [
   {
-    title: "All Products",
-    query:
-      "SELECT product_id, product_name, unit_price FROM products LIMIT 15;",
-    result: [
-      [
-        { product_id: 1, product_name: "Chai", unit_price: 18.0 },
-        { product_id: 2, product_name: "Chang", unit_price: 19.0 },
-        { product_id: 3, product_name: "Aniseed Syrup", unit_price: 10.0 },
-        {
-          product_id: 4,
-          product_name: "Chef Anton's Cajun Seasoning",
-          unit_price: 22.0,
-        },
-        {
-          product_id: 5,
-          product_name: "Chef Anton's Gumbo Mix",
-          unit_price: 21.35,
-        },
-        {
-          product_id: 6,
-          product_name: "Grandma's Boysenberry Spread",
-          unit_price: 25.0,
-        },
-        {
-          product_id: 7,
-          product_name: "Uncle Bob's Organic Dried Pears",
-          unit_price: 30.0,
-        },
-        {
-          product_id: 8,
-          product_name: "Northwoods Cranberry Sauce",
-          unit_price: 40.0,
-        },
-        { product_id: 9, product_name: "Mishi Kobe Niku", unit_price: 97.0 },
-        { product_id: 10, product_name: "Ikura", unit_price: 31.0 },
-        { product_id: 11, product_name: "Queso Cabrales", unit_price: 21.0 },
-        {
-          product_id: 12,
-          product_name: "Queso Manchego La Pastora",
-          unit_price: 38.0,
-        },
-        { product_id: 13, product_name: "Konbu", unit_price: 6.0 },
-        { product_id: 14, product_name: "Tofu", unit_price: 23.25 },
-        { product_id: 15, product_name: "Genen Shouyu", unit_price: 15.5 },
-      ],
-    ],
-  },
-  {
     title: "Customer Orders",
     query: "SELECT order_id, customer_id, order_date FROM orders LIMIT 15;",
     result: [
