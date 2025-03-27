@@ -260,7 +260,7 @@ function ResultsTable({
               },
             }}
           >
-            {[5, 10, 25, 50].map((number) => (
+            {[5, 10, 25, 50, 100].map((number) => (
               <MenuItem key={number} value={number.toString()}>
                 {number}
               </MenuItem>
