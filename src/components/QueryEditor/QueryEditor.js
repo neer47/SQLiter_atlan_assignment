@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, MenuItem, Select } from '@mui/material';
 import CodeMirror from '@uiw/react-codemirror';
 import { sql } from '@codemirror/lang-sql';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorView } from '@codemirror/view';
 import { autocompletion } from '@codemirror/autocomplete';
+import { format } from 'sql-formatter';
 
 function QueryEditor({ query, setQuery, mockData, selectedQuery, setSelectedQuery, handleRunQuery, loading }) {
+  const [formattedQuery, setFormattedQuery] = useState(query);
+
+  // Format the query whenever the query prop changes
+  useEffect(() => {
+    if (query) {
+      try {
+        const formatted = format(query, {
+          language: 'sql',
+          indent: '  ',
+          uppercase: true,
+          linesBetweenQueries: 2,
+        });
+        setFormattedQuery(formatted);
+      } catch (error) {
+        console.error('Error formatting SQL query:', error);
+        setFormattedQuery(query);
+      }
+    } else {
+      setFormattedQuery('');
+    }
+  }, [query]);
+
   const editorStyles = EditorView.theme({
     '&': {
       backgroundColor: '#31363F',
@@ -16,12 +39,15 @@ function QueryEditor({ query, setQuery, mockData, selectedQuery, setSelectedQuer
       height: '100%',
     },
     '.cm-scroller': {
-      overflow: 'auto',
+      overflowX: 'auto', // Enable horizontal scrolling
+      overflowY: 'auto', // Enable vertical scrolling
       minHeight: '100px',
       maxHeight: '300px',
+      whiteSpace: 'pre', // Prevent text wrapping
     },
     '.cm-content': {
       fontFamily: 'monospace',
+      whiteSpace: 'pre', // Prevent text wrapping
     },
     '.cm-gutters': {
       backgroundColor: '#31363F',
@@ -33,6 +59,20 @@ function QueryEditor({ query, setQuery, mockData, selectedQuery, setSelectedQuer
     },
     '.cm-selectionMatch': {
       backgroundColor: '#31363F',
+    },
+    '&::-webkit-scrollbar': {
+      width: '6px',
+      height: '6px', // For horizontal scrollbar
+    },
+    '&::-webkit-scrollbar-track': {
+      background: '#31363F',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#76ABAE',
+      borderRadius: '3px',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      background: '#5E8D90',
     },
   });
 
@@ -71,13 +111,16 @@ function QueryEditor({ query, setQuery, mockData, selectedQuery, setSelectedQuer
           borderRadius: theme => theme.shape.borderRadius,
           minHeight: '100px',
           maxHeight: '300px',
-          overflowY: 'auto',
+          overflow: 'hidden', // Prevent outer container from scrolling
           bgcolor: 'background.paper',
         }}
       >
         <CodeMirror
-          value={query}
-          onChange={(value) => setQuery(value)}
+          value={formattedQuery}
+          onChange={(value) => {
+            setFormattedQuery(value);
+            setQuery(value);
+          }}
           extensions={[sql(), autocompletion(), editorStyles]}
           theme={oneDark}
           basicSetup={{
