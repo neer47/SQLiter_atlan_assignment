@@ -80,7 +80,8 @@ LIMIT 5;
 ---
 
 ## ⏱️ Page Load Time
-![image](https://github.com/user-attachments/assets/1783aeaa-630c-4f7e-9e98-a15f94426e5a)
+![image](https://github.com/user-attachments/assets/6ff64ff4-1b00-486a-8ff5-d89dbb2bcb37)
+
 
  
 
