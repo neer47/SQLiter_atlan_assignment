@@ -14,7 +14,8 @@ _Replace the above link with your actual deployed site URL._
 _Replace the placeholder below with an actual screenshot of your app._  
 ![image](https://github.com/user-attachments/assets/dd007d01-bf2a-4919-8942-4967bddfc187)
 
-![image](https://github.com/user-attachments/assets/99d7edde-820f-4fd8-8a88-07edabd3fad6)
+![image](https://github.com/user-attachments/assets/0952a3bb-c660-4490-907b-954e5d36ffe1)
+
 
 
 
