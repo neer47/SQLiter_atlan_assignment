@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# 🚀 Online SQL Editor - Atlan Frontend Engineering Assignment  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🛠️ Built Using:
+- **React** with Material-UI for a sleek, responsive UI  
+- **CodeMirror 6** for a powerful SQL query editor  
+- **sql-formatter** for automatic SQL query formatting  
 
-## Available Scripts
+👉 **[View Demo on the Deployed Site 🚀](https://sq-liter-atlan-assignment.vercel.app/)**  
+_Replace the above link with your actual deployed site URL._  
 
+---
+
+## 📸 Screenshot  
+_Replace the placeholder below with an actual screenshot of your app._  
+![image](https://github.com/user-attachments/assets/dd007d01-bf2a-4919-8942-4967bddfc187)
+
+![image](https://github.com/user-attachments/assets/99d7edde-820f-4fd8-8a88-07edabd3fad6)
+
+
+
+---
+
+## 👨‍💻 Features
+✅ Execute predefined SQL queries using the CodeMirror editor or the sidebar menu.  
+✅ Sort query results by clicking on table headers in the results table.  
+✅ Filter data in the results table using the filter bar.  
+✅ Export query results as a CSV file with a single click.  
+✅ SQL queries are automatically formatted for better readability in the editor.  
+✅ Query history is saved and accessible via the sidebar (up to 5 recent queries).  
+✅ Responsive design with a single dark theme (`#222831`, `#31363F`, `#76ABAE`, `#EEEEEE`) for a consistent user experience.  
+
+---
+
+## ✍️ Predefined SQL Queries
+The app includes sample queries based on the **Northwind** database schema (from SQL Tutorial):
+
+```sql
+-- Fetch top 5 products
+SELECT product_id, product_name, unit_price FROM products LIMIT 5;
+
+-- Fetch top 5 customer orders
+SELECT order_id, customer_id, order_date FROM orders LIMIT 5;
+
+-- Get top 5 selling products
+SELECT p.product_name, SUM(od.quantity) AS total_quantity
+FROM products p
+JOIN order_details od ON p.product_id = od.product_id
+GROUP BY p.product_name
+ORDER BY total_quantity DESC
+LIMIT 5;
+
+-- Get monthly revenue
+SELECT DATE_TRUNC('month', order_date) AS month, SUM(od.quantity * od.unit_price) AS revenue
+FROM orders o
+JOIN order_details od ON o.order_id = od.order_id
+GROUP BY DATE_TRUNC('month', order_date)
+ORDER BY month
+LIMIT 5;
+
+-- Get inactive customers
+SELECT customer_id, company_name
+FROM customers
+WHERE customer_id NOT IN (SELECT DISTINCT customer_id FROM orders)
+LIMIT 5;
+```
+
+---
+
+## ⚙️ NPM Modules Used
+- **`react`**: ^18.2.0 - Core library for building the UI.  
+- **`react-dom`**: ^18.2.0 - To interact with React's virtual DOM.  
+- **`@mui/material`**: ^5.x.x - For Material-UI components and styling.  
+- **`@uiw/react-codemirror`**: ^4.x.x - For the CodeMirror 6 editor with SQL syntax highlighting.  
+- **`@codemirror/lang-sql`**: ^6.x.x - SQL language support for CodeMirror.  
+- **`@codemirror/autocomplete`**: ^6.x.x - Autocompletion support in CodeMirror.  
+- **`@codemirror/theme-one-dark`**: ^6.x.x - Dark theme for CodeMirror.  
+- **`react-router-dom`**: ^6.3.0 - For routing and navigation.  
+
+---
+
+## ⏱️ Page Load Time
+![Screenshot 2025-03-27 000356](https://github.com/user-attachments/assets/4732ad6b-5226-490a-aa26-bd90c0a90896) 
+
+---
+
+## 🪜 Steps Taken to Optimize Page Load Time
+✅ **Memoization with `useMemo`:** Memoized the `formattedData` and `filteredAndSortedData` computations in `ResultsTable.js` to reduce unnecessary re-renders.  
+✅ **Efficient State Updates:** Limited the `queryHistory` state in `SqlEditor.js` to the last 5 entries to prevent memory bloat.  
+✅ **Production Build Optimizations:** Leveraged Create React App’s production build features, including minification, tree-shaking, and code splitting.  
+✅ **Lightweight Dependencies:** Used lightweight libraries like `sql-formatter` to format SQL queries efficiently.  
+✅ **CodeMirror Optimization:** Applied query formatting only when the query prop changes (via `useEffect` in `QueryEditor.js`), preventing unnecessary formatting.  
+✅ **Suggested Deployment on Netlify:** Leveraged Netlify's CDN for reduced latency and improved load times globally.  
+
+---
+
+## 🚀 Available Scripts
 In the project directory, you can run:
 
-### `npm start`
+### 🔥 `yarn start`
+Runs the app in development mode.  
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
+### 📦 `yarn build`
+Builds the app for production to the `build` folder.  
+The build is minified, and the filenames include hashes.  
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📝 License
+This project is licensed under the MIT License.  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+💡 **Feel free to fork and customize this project!** 😊  
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Let me know if this looks good or if you'd like to modify anything! 🚀
