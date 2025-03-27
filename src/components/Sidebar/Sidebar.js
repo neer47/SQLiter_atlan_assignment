@@ -1,32 +1,31 @@
-import React from "react";
-import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import React from 'react';
+import { List, ListItem, ListItemText, Divider, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 // Sidebar container styles
-const SidebarContainer = styled("div")(({ theme }) => ({
-  width: 240,
-  height: "calc(100vh - 64px)",
+const SidebarContainer = styled('div')(({ theme }) => ({
+  width: { xs: '100%', sm: '100%', md: 240 }, // Full width on small screens, 240px on larger screens
+  height: { xs: 'auto', md: 'calc(100vh - 64px)' }, // Content-based height on small screens, fixed height on larger screens
   backgroundColor: theme.palette.background.paper,
-  borderRight: `1px solid ${theme.palette.divider}`,
+  borderRight: { xs: 0, md: `1px solid ${theme.palette.divider}` }, // Remove border-right on small screens
   padding: theme.spacing(2),
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   color: theme.palette.text.primary,
-  overflowY: "auto",
+  overflowY: 'auto',
 }));
 
 // Section title styles
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontSize: "14px",
+  fontSize: '14px',
   fontWeight: 600,
   color: theme.palette.text.secondary,
-  textTransform: "uppercase",
+  textTransform: 'uppercase',
   marginBottom: theme.spacing(1),
   marginTop: theme.spacing(2),
 }));
-
-
 
 function Sidebar({ onQuerySelect, availableQueries, queryHistory }) {
   return (
@@ -41,9 +40,9 @@ function Sidebar({ onQuerySelect, availableQueries, queryHistory }) {
               onClick={() => onQuerySelect(index, 'available')}
               sx={{
                 cursor: 'pointer',
-                "&:hover": {
+                '&:hover': {
                   backgroundColor: 'secondary.main',
-                  "& .MuiListItemText-primary": {
+                  '& .MuiListItemText-primary': {
                     color: 'primary.main',
                   },
                 },
@@ -66,9 +65,9 @@ function Sidebar({ onQuerySelect, availableQueries, queryHistory }) {
                 onClick={() => onQuerySelect(index, 'history')}
                 sx={{
                   cursor: 'pointer',
-                  "&:hover": {
+                  '&:hover': {
                     backgroundColor: 'secondary.main',
-                    "& .MuiListItemText-primary": {
+                    '& .MuiListItemText-primary': {
                       color: 'primary.main',
                     },
                   },
@@ -93,12 +92,12 @@ function Sidebar({ onQuerySelect, availableQueries, queryHistory }) {
         <List>
           <ListItem
             button
-            onClick={() => window.open("https://www.sqltutorial.org/", "_blank")}
+            onClick={() => window.open('https://www.sqltutorial.org/', '_blank')}
             sx={{
               cursor: 'pointer',
-              "&:hover": {
+              '&:hover': {
                 backgroundColor: 'secondary.main',
-                "& .MuiListItemText-primary": {
+                '& .MuiListItemText-primary': {
                   color: 'primary.main',
                 },
               },

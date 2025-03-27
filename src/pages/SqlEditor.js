@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { Box, CssBaseline, Drawer } from '@mui/material';
+import { Box, Drawer, AppBar, Toolbar, Typography } from '@mui/material';
 import Sidebar from '../components/Sidebar/Sidebar';
 import QueryEditor from '../components/QueryEditor/QueryEditor';
 import ResultsTable from '../components/ResultsTable/ResultsTable';
-import mockData  from '../data/mockData';
+import mockData from '../data/mockData';
 
 const drawerWidth = 240;
 
-
 function SqlEditor() {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedQuery, setSelectedQuery] = useState(0);
   const [queryHistory, setQueryHistory] = useState([]);
@@ -17,10 +15,6 @@ function SqlEditor() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const handleQuerySelect = (index, source) => {
     if (source === 'available') {
@@ -46,10 +40,9 @@ function SqlEditor() {
         ];
       }
 
-      // Format results for ResultsTable
       const columns = queryResult.length > 0 ? Object.keys(queryResult[0]).map(key => ({
-        id: key, // Use 'id' to match ResultsTable expectation
-        name: key.replace(/_/g, ' ').toUpperCase(), // Use 'name' for display
+        id: key,
+        name: key.replace(/_/g, ' ').toUpperCase(),
         sortable: true,
       })) : [];
       const rows = queryResult.map((row, index) => ({ id: index, ...row }));
@@ -86,97 +79,119 @@ function SqlEditor() {
   };
 
   return (
-    <Box sx={{ display: 'flex', bgcolor: 'background.default' }}>
-      <CssBaseline />
-      <Drawer
-        variant="permanent"
+    <Box sx={{ bgcolor: 'background.default' }}>
+      {/* AppBar */}
+      <AppBar
+        position="fixed"
         sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { 
-            width: drawerWidth, 
-            boxSizing: 'border-box',
-            mt: 8,
-            bgcolor: 'background.paper',
-            borderRight: 1,
-            borderColor: 'divider',
-          },
-          display: { xs: 'none', sm: 'none', md: 'block' },
+          width: '100%',
+          ml: { md: `${drawerWidth}px` },
+          bgcolor: 'primary.main',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >
-        <Sidebar onQuerySelect={handleQuerySelect} availableQueries={mockData} queryHistory={queryHistory} />
-      </Drawer>
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        sx={{
-          display: { xs: 'block', sm: 'block', md: 'none' },
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { 
-            width: drawerWidth, 
-            boxSizing: 'border-box',
-            mt: 8,
-            bgcolor: 'background.paper',
-            borderRight: 1,
-            borderColor: 'divider',
-          },
-        }}
-      >
-        <Sidebar onQuerySelect={handleQuerySelect} availableQueries={mockData} queryHistory={queryHistory} />
-      </Drawer>
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            SQL Query Editor
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {/* Root Layout */}
       <Box
-        component="main"
         sx={{
-          flexGrow: 1,
-          p: 3,
-          mt: 8,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
           display: 'flex',
-          flexDirection: 'column',
-          height: 'calc(100vh - 64px)',
-          bgcolor: 'background.default',
+          flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+          minHeight: '100vh',
+          pt: 8,
         }}
       >
-        <Box
+        {/* Permanent Drawer for Larger Screens */}
+        <Drawer
+          variant="permanent"
           sx={{
-            flex: 1,
-            overflow: 'auto',
-            mb: 2,
-            minHeight: '200px',
-            maxHeight: '50%',
+            width: drawerWidth,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: { 
+              width: drawerWidth, 
+              boxSizing: 'border-box',
+              mt: 8,
+              bgcolor: 'background.paper',
+              borderRight: 1,
+              borderColor: 'divider',
+            },
+            display: { xs: 'none', sm: 'none', md: 'block' },
           }}
         >
-          <QueryEditor
-            query={query}
-            setQuery={setQuery}
-            mockData={mockData}
-            selectedQuery={selectedQuery}
-            setSelectedQuery={setSelectedQuery}
-            handleRunQuery={handleRunQuery}
-            loading={loading}
-          />
+          <Sidebar onQuerySelect={handleQuerySelect} availableQueries={mockData} queryHistory={queryHistory} />
+        </Drawer>
+
+        {/* Sidebar for Small Screens */}
+        <Box
+          sx={{
+            display: { xs: 'block', sm: 'block', md: 'none' },
+            width: '100%', // Ensure full width on small screens
+            p: 2,
+            bgcolor: 'background.paper',
+            borderBottom: { xs: 1, sm: 1, md: 0 },
+            borderColor: 'divider',
+          }}
+        >
+          <Sidebar onQuerySelect={handleQuerySelect} availableQueries={mockData} queryHistory={queryHistory} />
         </Box>
+
+        {/* Main Content (QueryEditor and ResultsTable) */}
         <Box
+          component="main"
           sx={{
-            flex: 1,
-            overflow: 'auto',
-            minHeight: '200px',
-            maxHeight: '50%',
+            flexGrow: 1,
+            p: 3,
+            width: { xs: '100%', md: `calc(100% - ${drawerWidth}px)` }, // Full width on small screens
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 'calc(100vh - 64px)',
+            bgcolor: 'background.default',
           }}
         >
-          <ResultsTable
-            isExecuting={loading}
-            columns={results.columns}
-            data={results}
-            currentPage={currentPage + 1} // Adjust for 1-based indexing in ResultsTable
-            rowsPerPage={rowsPerPage}
-            onChangePage={(page) => handleChangePage(null, page - 1)} // Adjust for 0-based indexing
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-            totalRows={results.rows.length}
-            onExportResults={handleExportResults}
-          />
+          <Box
+            sx={{
+              flex: 1,
+              overflow: 'auto',
+              mb: 2,
+              minHeight: '200px',
+              maxHeight: { xs: '300px', md: '50%' },
+            }}
+          >
+            <QueryEditor
+              query={query}
+              setQuery={setQuery}
+              mockData={mockData}
+              selectedQuery={selectedQuery}
+              setSelectedQuery={setSelectedQuery}
+              handleRunQuery={handleRunQuery}
+              loading={loading}
+            />
+          </Box>
+          <Box
+            sx={{
+              flex: 1,
+              overflow: 'auto',
+              minHeight: '200px',
+              maxHeight: { xs: '300px', md: '50%' },
+            }}
+          >
+            <ResultsTable
+              isExecuting={loading}
+              columns={results.columns}
+              data={results}
+              currentPage={currentPage + 1}
+              rowsPerPage={rowsPerPage}
+              onChangePage={(page) => handleChangePage(null, page - 1)}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              totalRows={results.rows.length}
+              onExportResults={handleExportResults}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>
