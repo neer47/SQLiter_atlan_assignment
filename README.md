@@ -79,7 +79,8 @@ LIMIT 5;
 ---
 
 ## ⏱️ Page Load Time
-![Screenshot 2025-03-27 000356](https://github.com/user-attachments/assets/4732ad6b-5226-490a-aa26-bd90c0a90896) 
+![image](https://github.com/user-attachments/assets/8708ab11-aef6-4744-bb00-c32cbbae6ddf)
+ 
 
 ---
 
