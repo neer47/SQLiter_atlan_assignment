@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Drawer, AppBar, Toolbar, Typography } from '@mui/material';
+import { Box, Drawer} from '@mui/material';
 import Sidebar from '../components/Sidebar/Sidebar';
 import QueryEditor from '../components/QueryEditor/QueryEditor';
 import ResultsTable from '../components/ResultsTable/ResultsTable';
@@ -80,23 +80,6 @@ function SqlEditor() {
 
   return (
     <Box sx={{ bgcolor: 'background.default' }}>
-      {/* AppBar */}
-      <AppBar
-        position="fixed"
-        sx={{
-          width: '100%',
-          ml: { md: `${drawerWidth}px` },
-          bgcolor: 'primary.main',
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            SQL Query Editor
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       {/* Root Layout */}
       <Box
         sx={{
@@ -116,7 +99,7 @@ function SqlEditor() {
               width: drawerWidth, 
               boxSizing: 'border-box',
               mt: 8,
-              bgcolor: 'background.paper',
+              bgcolor: 'background.paper',  
               borderRight: 1,
               borderColor: 'divider',
             },

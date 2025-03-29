@@ -113,7 +113,6 @@ function ResultsTable({
     <Card sx={{ mt: 4, bgcolor: 'background.paper', boxShadow: 1, height: '100%' }}>
       <CardHeader
         title="Results"
-        titleTypographyProps={{ color: 'text.primary' }}
         action={
           <Box sx={{ display: 'flex', gap: 1 }}>
             <Button

@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Navbar from '../components/Navbar/Navbar';
 
 const Home = () => {
   const theme = useTheme();
@@ -15,7 +14,6 @@ const Home = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'background.default' }}>
-      <Navbar />
 
       {/* Main Content */}
       <Box
