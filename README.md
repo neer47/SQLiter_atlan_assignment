@@ -92,7 +92,6 @@ LIMIT 5;
 ✅ **Memoization with `useMemo`:** Memoized the `formattedData` and `filteredAndSortedData` computations in `ResultsTable.js` to reduce unnecessary re-renders.  
 ✅ **Efficient State Updates:** Limited the `queryHistory` state in `SqlEditor.js` to the last 5 entries to prevent memory bloat.  
 ✅ **Production Build Optimizations:** Leveraged Create React App’s production build features, including minification, tree-shaking, and code splitting.  
-✅ **Lightweight Dependencies:** Used lightweight libraries like `sql-formatter` to format SQL queries efficiently.  
 ✅ **CodeMirror Optimization:** Applied query formatting only when the query prop changes (via `useEffect` in `QueryEditor.js`), preventing unnecessary formatting.  
 ✅ **Suggested Deployment on Netlify:** Leveraged Netlify's CDN for reduced latency and improved load times globally.  
 
