@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
@@ -56,29 +56,19 @@ function Navbar() {
           }}
         >
           <ListItemText
-            primary={item.label}
-            primaryTypographyProps={{
-              fontWeight: 'medium',
-              color: location.pathname === item.path ? 'primary.main' : 'text.primary',
-            }}
+            primary={
+              <Typography
+                fontWeight="medium"
+                color={location.pathname === item.path ? 'primary.main' : 'text.primary'}
+              >
+                {item.label}
+              </Typography>
+            }
           />
         </ListItem>
       ))}
     </List>
   );
-
-  useEffect(() => {
-    const handleResize = () => {
-      // Your resize logic here
-    };
-
-    const debouncedResize = debounce(handleResize, 100); // Debounce function
-
-    window.addEventListener('resize', debouncedResize);
-    return () => {
-      window.removeEventListener('resize', debouncedResize);
-    };
-  }, []);
 
   return (
     <>
@@ -163,19 +153,6 @@ function Navbar() {
       </Drawer>
     </>
   );
-}
-
-// Debounce function
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
 
 export default Navbar;
