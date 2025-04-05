@@ -93,7 +93,6 @@ LIMIT 5;
 ✅ **Efficient State Updates:** Limited the `queryHistory` state in `SqlEditor.js` to the last 5 entries to prevent memory bloat.  
 ✅ **Production Build Optimizations:** Leveraged Create React App’s production build features, including minification, tree-shaking, and code splitting.  
 ✅ **CodeMirror Optimization:** Applied query formatting only when the query prop changes (via `useEffect` in `QueryEditor.js`), preventing unnecessary formatting.  
-✅ **Suggested Deployment on Netlify:** Leveraged Netlify's CDN for reduced latency and improved load times globally.  
 
 ---
 
